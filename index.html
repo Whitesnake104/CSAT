@@ -7,7 +7,7 @@
     <title>Notion Countdown Timer</title>
     <style>
         body {
-            background-color: transparent; 
+            background-color: transparent;
             margin: 0;
             display: flex;
             justify-content: center;
@@ -16,28 +16,30 @@
         }
           
         #timer {
-            color: #183059; 
+            color: #183059;
             text-align: center;
             text-transform: uppercase;
             font-family: 'Lato', sans-serif;
             font-size: .8em;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
         }
+
+        /* 개별 박스 스타일 */
         .days, .hours, .minutes, .seconds {
             display: inline-block;
             padding: 20px;
-            width: 110px;
-            border-radius: 10px;
-            background: #ffffff; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            width: 100px;
+            border-radius: 8px;
+            background: #eeeeee;
             margin: 0 5px;
         }
+
+        /* 숫자 스타일 */
         .numbers {
             font-family: 'Montserrat', sans-serif;
-            color: #183059; 
+            color: #183059;
             font-size: 3.5em;
             text-align: center;
-            line-height: 1.2;
             margin-bottom: 5px;
         }
     </style>
@@ -62,26 +64,28 @@
 <script>
     const myDate = new Date('Nov 19, 2026 00:00:00').getTime();
 
-    let timer = setInterval(function() {
+    const updateTimer = () => {
         const today = new Date().getTime();
         const diff = myDate - today;
 
         if (diff < 0) {
-            clearInterval(timer);
-            document.getElementById("timer").innerHTML = "EXPIRED";
+            document.getElementById("timer").innerHTML = "TIME UP!";
             return;
         }
 
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-        document.getElementById("days").innerHTML = days;
-        document.getElementById("hours").innerHTML = hours;
-        document.getElementById("minutes").innerHTML = minutes;
-        document.getElementById("seconds").innerHTML = seconds;
-    }, 1000);
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    };
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
 </script>
 </body>
 </html>
