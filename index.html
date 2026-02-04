@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
+    <title>Notion Countdown Timer</title>
+    <style>
+        body {
+            background-color: transparent; 
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+          
+        #timer {
+            color: #183059; 
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Lato', sans-serif;
+            font-size: .8em;
+            letter-spacing: 2px;
+        }
+        .days, .hours, .minutes, .seconds {
+            display: inline-block;
+            padding: 20px;
+            width: 110px;
+            border-radius: 10px;
+            background: #ffffff; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); 
+            margin: 0 5px;
+        }
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            color: #183059; 
+            font-size: 3.5em;
+            text-align: center;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+<div id="timer">
+    <div class="days"> 
+        <div id="days" class="numbers">0</div>days
+    </div> 
+    <div class="hours"> 
+        <div id="hours" class="numbers">0</div>hours
+    </div> 
+    <div class="minutes"> 
+        <div id="minutes" class="numbers">0</div>minutes
+    </div> 
+    <div class="seconds"> 
+        <div id="seconds" class="numbers">0</div>seconds
+    </div> 
+</div>
+
+<script>
+    const myDate = new Date('Nov 19, 2026 08:00:00').getTime();
+
+    let timer = setInterval(function() {
+        const today = new Date().getTime();
+        const diff = myDate - today;
+
+        if (diff < 0) {
+            clearInterval(timer);
+            document.getElementById("timer").innerHTML = "EXPIRED";
+            return;
+        }
+
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days;
+        document.getElementById("hours").innerHTML = hours;
+        document.getElementById("minutes").innerHTML = minutes;
+        document.getElementById("seconds").innerHTML = seconds;
+    }, 1000);
+</script>
+</body>
+</html>
